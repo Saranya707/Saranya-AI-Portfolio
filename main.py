@@ -432,6 +432,25 @@ async def javascript():
         media_type="application/javascript"
     )
 
+# ==========================================
+# 12. GOOGLE SITEMAP
+# ==========================================
+
+@app.get("/sitemap.xml", include_in_schema=False)
+async def sitemap():
+    file_path = BASE / "sitemap.xml"
+
+    if not file_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail="sitemap.xml not found"
+        )
+
+    return FileResponse(
+        file_path,
+        media_type="application/xml"
+    )
+
 
 # ==========================================
 # END OF MAIN.PY
